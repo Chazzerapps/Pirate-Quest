@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Raymond’s Swim Quest</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="splash-body kids" id="splashBody">
+
+  <div class="splash-card">
+    <h1 class="splash-title">Raymond’s Swim Quest</h1>
+
+    <div id="kidName" class="kid-name" aria-live="polite"></div>
+
+    <div class="splash-mascot">
+      <img src="assets/raymond-blue.png" alt="Raymond">
+    </div>
+
+   
+    <button id="startBtn" class="splash-start">Start Quest</button>
+  </div>
+
+<script>
+(() => {
+  const KEY = 'passportOwnerName';
+  const nameEl = document.getElementById('kidName');
+  const startBtn = document.getElementById('startBtn');
+
+  function getName() {
+    try { return localStorage.getItem(KEY); } catch(e){ return null; }
+  }
+  function setName(v) {
+    try { localStorage.setItem(KEY, v); } catch(e){}
+  }
+  function renderName(v) {
+    if (!nameEl) return;
+    nameEl.textContent = v ? v : '';
+  }
+
+  // Show saved name (if any) immediately.
+  renderName(getName());
+
+  // Ask for name on button press (more reliable on iPhone).
+  startBtn?.addEventListener('click', () => {
+    let name = getName();
+    if (!name) {
+      const input = prompt("What’s your name?", "");
+      name = (input && input.trim()) || "";
+      if (name) setName(name);
+    }
+    renderName(name);
+
+    try { sessionStorage.setItem('enteredViaSplash', '1'); } catch(e){}
+    location.href = 'overview.html';
+  });
+})();
+</script>
+</body>
+</html>
