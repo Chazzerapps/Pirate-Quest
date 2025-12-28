@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Raymond’s Swim Quest — Overview</title>
+
+  <!-- Gate: only allow entry if we came via the splash -->
+  <script>
+    (function(){
+      try{
+        const entered = sessionStorage.getItem('enteredViaSplash');
+        if(!entered){
+          window.location.replace('index.html');
+        }
+      }catch(e){}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="overview-body">
+  <header class="glass">
+    <div class="titlebar">
+      <div class="brand">
+        <div class="dot"></div>
+        <h1>Raymond’s Swim Quest</h1>
+      </div>
+      <span id="overviewBadge" class="badge">0 / 0</span>
+      <div class="actions">
+        <button id="openAppBtn" class="pill primary" type="button">
+          Start Quest
+        </button>
+        <button id="changeNameBtn" class="pill ghost" type="button">
+          Change name
+        </button>
+        <a href="index.html" class="pill ghost">Exit</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="overview-main">
+    <div class="card overview-card">
+      <div class="overview-header-row">
+        <div class="overview-text">
+          <h2>Sydney overview map</h2>
+          <p id="overviewText" class="overview-subtext">
+            Loading pools…
+          </p>
+        </div>
+      </div>
+
+      <div id="overviewMap"></div>
+
+      <div class="overview-legend">
+        <span class="legend-item">
+          <span class="legend-dot legend-dot-visited"></span> Swum
+        </span>
+        <span class="legend-item">
+          <span class="legend-dot legend-dot-notvisited"></span> Not yet
+        </span>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- ES module that uses shared data + storage helpers -->
+  <script type="module" src="overview.js"></script>
+</body>
+</html>
