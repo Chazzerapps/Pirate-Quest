@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Raymond’s Swim Quest — App</title>
+
+  <!-- Gate: only allow entry if we came via the splash / overview -->
+  <script>
+    (function(){
+      try{
+        const entered = sessionStorage.getItem('enteredViaSplash');
+        if(!entered){
+          window.location.replace('index.html');
+        } else {
+          // app.html is the final page, so we clear the gate flag here.
+          sessionStorage.removeItem('enteredViaSplash');
+        }
+      }catch(e){}
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="glass">
+    <div class="titlebar">
+      <div class="brand">
+        <div class="dot"></div>
+        <h1>Raymond’s Swim Quest</h1>
+      </div>
+
+      <span id="countBadge" class="badge">0 / 0</span>
+
+      <div class="actions">
+        <button id="toggleBtn" class="pill primary" title="Toggle Stamps/List">Stickers</button>
+        <button id="resetBtn" class="pill ghost" title="Reset stamps">Reset Stickers</button>
+        <a href="index.html" class="pill ghost" title="Exit app">Exit</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!--
+      LIST VIEW
+      =========
+      • Shows one pool at a time (name + "Not yet / Stamped" chip)
+      • Big arrows jump to the previous / next pool
+      • Map zooms and pans to the selected pool
+    -->
+    <section id="listView" class="view active">
+      <div class="map-wrap card main-layout">
+        <div id="poolList" class="pool-header"></div>
+
+        <div class="nav-bar">
+          <button id="btnDown" class="nav-big" aria-label="Previous pool">Prev</button>
+
+          <div class="nav-middle">
+            <button id="openNativeMap" class="map-small">Open in Maps</button>
+            <button id="mapToggle" class="map-small">Full Map</button>
+          </div>
+
+          <button id="btnUp" class="nav-big" aria-label="Next pool">Next</button>
+        </div>
+
+        <div id="map" class="pool-map"></div>
+      </div>
+    </section>
+
+
+    <!--
+      STAMPS VIEW
+      ===========
+      • Shows a paged grid of "passport" cards
+      • Each card has the pool name, stamp icon, and (optional) visit date
+    -->
+    <section id="passportView" class="view">
+  
+      <div class="passport-nav">
+        <button id="prevPassportPage" class="pill ghost">&laquo; Prev</button>
+        <span id="passportPageLabel" class="page-label">Page 1 of 4</span>
+        <button id="nextPassportPage" class="pill ghost">Next &raquo;</button>
+      </div>
+      <div id="passportGrid" class="passport-grid"></div>
+
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Main app logic as an ES module -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>
