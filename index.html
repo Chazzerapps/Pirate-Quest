@@ -3,22 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Raymond’s Swim Quest</title>
+  <title>Captain Raymond’s Treasure Quest</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="splash-body kids" id="splashBody">
 
   <div class="splash-card">
-    <h1 class="splash-title">Raymond’s Swim Quest</h1>
+    <h1 class="splash-title">Captain Raymond’s Treasure Quest</h1>
 
     <div id="kidName" class="kid-name" aria-live="polite"></div>
 
     <div class="splash-mascot">
-      <img src="assets/raymond-blue.png" alt="Raymond">
+      <img src="assets/raymond-pirate.png" alt="Captain Raymond the Pirate">
     </div>
 
-   
-    <button id="startBtn" class="splash-start">Start Quest</button>
+    <button id="startBtn" class="splash-start">Begin the Quest</button>
   </div>
 
 <script>
@@ -45,7 +44,7 @@
   startBtn?.addEventListener('click', () => {
     let name = getName();
     if (!name) {
-      const input = prompt("What’s your name?", "");
+      const input = prompt("What’s your name, Captain?", "");
       name = (input && input.trim()) || "";
       if (name) setName(name);
     }
