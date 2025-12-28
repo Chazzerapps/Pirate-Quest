@@ -248,14 +248,13 @@ function setView(showStamps) {
   listView.classList.toggle('active', !showStamps);
   stampsView.classList.toggle('active', showStamps);
 
-  toggleBtn.textContent = showStamps ? 'Back to List' : 'Stamps';
+  // Pirate wording – never revert to "Stamps"
+  toggleBtn.textContent = showStamps ? 'Back to List' : 'Treasure';
 
-  // Only render stamps when we actually show them
   if (showStamps) renderStamps();
-
-  // Leaflet maps need a resize nudge when layout changes
   if (map) setTimeout(() => map.invalidateSize(), 150);
 }
+
 
 // ----------------------------------------------------------
 // OPEN CURRENT POOL IN NATIVE MAPS APP
