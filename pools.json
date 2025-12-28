@@ -5,7 +5,7 @@
     "suburb": "Northbridge",
     "lat": -33.80636176696457,
     "lng": 151.22191926469534,
-    "stamp": "stamps/northbridge.png"
+    "stamp": "assets/stamp-compass.png"
   },
   {
     "id": "greenwich",
@@ -13,7 +13,7 @@
     "suburb": "Greenwich",
     "lat": -33.841147628428715,
     "lng": 151.18295938891552,
-    "stamp": "stamps/greenwich.png"
+    "stamp": "assets/stamp-map.png"
   },
   {
     "id": "woolwich",
@@ -21,36 +21,31 @@
     "suburb": "Woolwich",
     "lat": -33.839379,
     "lng": 151.16948,
-    "stamp": "stamps/woolwich.png"
+    "stamp": "assets/stamp-anchor.png"
   },
-
   {
     "id": "barangaroo",
     "name": "Marrinawi Cove, Barangaroo",
     "suburb": "Barangaroo",
     "lat": -33.85538212709025,
     "lng": 151.20195305876618,
-    "stamp": "stamps/barangaroo.png"
+    "stamp": "assets/stamp-flag.png"
   },
-
   {
     "id": "cremorne-point",
     "name": "Maccallum Seawater Pool, Cremorne Point",
     "suburb": "Cremorne Point",
     "lat": -33.84529836233467,
     "lng": 151.22808678594717,
-    "stamp": "stamps/cremorne-point.png"
+    "stamp": "assets/stamp-scroll.png"
   },
-
-
-
   {
     "id": "nielsen-park",
     "name": "Nielsen Park – Shark Beach, Vaucluse",
     "suburb": "Nielsen Park",
     "lat": -33.850562,
     "lng": 151.267464,
-    "stamp": "stamps/nielsen-park.png"
+    "stamp": "assets/stamp-telescope.png"
   },
   {
     "id": "watsons-bay",
@@ -58,7 +53,7 @@
     "suburb": "Watsons Bay",
     "lat": -33.845036171452385,
     "lng": 151.2814804824114,
-    "stamp": "stamps/watsons-bay.png"
+    "stamp": "assets/stamp-treasure-pouch.png"
   },
   {
     "id": "parsley-bay",
@@ -66,7 +61,6 @@
     "suburb": "Parsley Bay",
     "lat": -33.851478445440314,
     "lng": 151.2775158904059,
-    "stamp": "stamps/parsley-bay.png"
+    "stamp": "assets/stamp-treasure-chest.png"
   }
-  
 ]
