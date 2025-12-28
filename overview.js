@@ -17,19 +17,24 @@ function scheduleOverviewInvalidate(map) {
   setTimeout(() => { try { map.invalidateSize(true); } catch (e) {} }, 600);
 }
 
-function createRaymondIcon(isVisited) {
-  const size = 56; // retina-friendly, still kid-sized
+/**
+ * Overview marker icon:
+ * - NOT visited → red X
+ * - Visited → pool's treasure stamp
+ */
+function createOverviewIcon(pool, isVisited) {
+  const size = isVisited ? 46 : 36;
 
   return L.icon({
     iconUrl: isVisited
-      ? './assets/Raymond-head-red.png'
-      : './assets/Raymond-head-green.png',
+      ? pool.stamp                     // e.g. assets/stamp-compass.png
+      : './assets/marker-x.png',       // red X icon
     iconSize: [size, size],
-    iconAnchor: [size / 2, size / 2],   // true centre
-    popupAnchor: [0, -size / 2 - 6]     // popup above head
+    iconAnchor: [size / 2, size / 2],
+    popupAnchor: [0, -size / 2 - 6],
+    className: isVisited ? 'marker-stamp' : 'marker-x'
   });
 }
-
 
 function updateOverviewText(pools, visitedMap) {
   const badgeEl = document.getElementById('overviewBadge');
@@ -43,8 +48,8 @@ function updateOverviewText(pools, visitedMap) {
   if (textEl) {
     textEl.textContent =
       total === 0
-        ? 'No pools configured.'
-        : `You’ve visited ${visitedCount} of ${total} harbour pools.`;
+        ? 'No locations charted yet.'
+        : `Treasure found at ${visitedCount} of ${total} locations.`;
   }
 }
 
@@ -69,7 +74,7 @@ async function initOverviewMap() {
     pools = await loadPools();
   } catch (err) {
     console.error(err);
-    mapEl.textContent = 'Error loading pools list.';
+    mapEl.textContent = 'Error loading locations.';
     return;
   }
 
@@ -84,7 +89,7 @@ async function initOverviewMap() {
 
     const marker = L.marker(
       [pool.lat, pool.lng],
-      { icon: createRaymondIcon(isVisited) }
+      { icon: createOverviewIcon(pool, isVisited) }
     ).addTo(map);
 
     marker.bindPopup(`<strong>${pool.name}</strong>`);
