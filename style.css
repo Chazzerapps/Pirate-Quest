@@ -298,8 +298,6 @@ main {
   border-color: var(--gold-deep);
 }
 
-
-
 .row-selected {
   background: rgba(14,36,54,.06);
 }
@@ -447,11 +445,9 @@ body.full-map #map {
   position: relative; /* for on-stamp date */
 }
 
-
-
 /* Make passport stamps larger */
 .passport .stamp img {
-  width: 120px;      /* was ~80px */
+  width: 120px;
   height: auto;
 }
 
@@ -503,6 +499,49 @@ body.full-map #map {
   padding: 2px 6px;
   border-radius: 999px;
   box-shadow: 0 0 0 1px rgba(0,0,0,0.04);
+}
+
+/* ==========================================================================
+   ✅ FIX: SHOW 2 PASSPORT CARDS PER PAGE ON PHONE (NO SCROLL)
+   - Your JS already uses stampsPerPage = 2
+   - This CSS ensures BOTH cards fit in the visible area
+   ========================================================================== */
+
+@media (max-width: 700px) {
+  /* Force one column + two equal-height rows */
+  .passport-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 1fr 1fr;
+    gap: 14px;
+
+    /* Fit exactly two cards inside the viewport, below header + nav */
+    height: calc(100vh - 250px);
+    overflow: hidden;
+
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* Make each card distribute space nicely */
+  .passport {
+    padding: 12px 12px;
+    gap: 4px;
+    justify-content: space-between;
+  }
+
+  /* Slightly smaller stamp so it never pushes the 2nd card off-screen */
+  .passport .stamp img {
+    width: 110px;
+  }
+}
+
+/* iPhone Safari: prefer safe viewport unit if available */
+@supports (-webkit-touch-callout: none) {
+  @media (max-width: 700px) {
+    .passport-grid {
+      height: calc(100svh - 250px);
+    }
+  }
 }
 
 /* ==========================================================================
@@ -731,15 +770,12 @@ body.full-map #map {
   background-color: #6c8ab4;
 }
 
-
 /* Responsive tweaks for overview */
 
 @media (max-width: 700px) {
   .overview-main {
     padding: 10px 8px 16px;
   }
-
-   
 
   #overviewMap {
     height: calc(100vh - 200px);
@@ -750,14 +786,11 @@ body.full-map #map {
    /* Right arrow: space from right edge */
    .arrow-btn.right { margin-right:32px;
    }
-                   
 }
 
 /* ================================
    RAYMOND MAP MARKERS (OVERVIEW)
    ================================ */
-
-
 
 /* ================================
    MAP ACTION BUTTONS — FIXED TOP
@@ -785,7 +818,6 @@ body.full-map #map {
   color: var(--ink, #1F2732);
   box-shadow: 0 1px 2px rgba(0,0,0,0.12);
 }
-
 
 /* ==========================================================================
    NAV BAR (Prev / Next + Map buttons)
@@ -828,7 +860,6 @@ body.full-map #map {
   box-shadow: 0 1px 2px rgba(0,0,0,.12);
 }
 
-
 /* ==========================================================================
    PASSPORT EMPTY SLOTS (show nothing until visited)
    ========================================================================== */
@@ -848,7 +879,6 @@ body.full-map #map {
   min-height: 90px;
   border-radius: 14px;
 }
-
 
 /* Clear primary action for marking a pool as visited */
 .stamp-chip.cta {
@@ -881,7 +911,6 @@ body.full-map #map {
   line-height: 1.35;
   opacity: .85;
 }
-
 
 /* =========================================================
    RAYMOND’S SWIM QUEST — STORYBOOK SPLASH
@@ -917,7 +946,6 @@ body.kids.splash-body{
   border: none;
   box-shadow: none;
 }
-
 
 /* Title stays calm and readable */
 .kids .splash-title{
