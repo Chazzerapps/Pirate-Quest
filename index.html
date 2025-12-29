@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>First Mate Santiago’s Treasure Quest</title>
+  <title>Santiago’s Treasure Quest</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body class="splash-body kids" id="splashBody">
@@ -11,7 +11,11 @@
   <div class="splash-card">
     <h1 class="splash-title">Captain Raymond’s Treasure Quest</h1>
 
-    <div id="kidName" class="kid-name" aria-live="polite">First Mate Santiago</div>
+    <!-- Two-line greeting; keep kid-name class so your existing styling applies -->
+    <div id="kidName" class="kid-name" aria-live="polite">
+      Ahoy there,<br>
+      <span class="highlight">First Mate Santiago!</span>
+    </div>
 
     <div class="splash-mascot">
       <img src="assets/raymond-pirate.png" alt="Captain Raymond the Pirate">
@@ -23,6 +27,76 @@
 <script>
 (() => {
   const startBtn = document.getElementById('startBtn');
+
+  // Detect whether the user has any progress saved (visited pools, treasures, stamps, etc.)
+  function hasAnyProgress() {
+    try {
+      // Common key names used by apps like this
+      const commonKeys = [
+        'visited', 'visitedMap', 'visitedPools', 'poolsVisited', 'poolVisited',
+        'treasure', 'treasures', 'treasureFound', 'treasuresFound',
+        'stamp', 'stamps', 'collectedStamps'
+      ];
+
+      for (const k of commonKeys) {
+        const v = localStorage.getItem(k);
+        if (!v) continue;
+
+        // If it's JSON, try to interpret
+        try {
+          const parsed = JSON.parse(v);
+
+          // Arrays: any items = progress
+          if (Array.isArray(parsed) && parsed.length > 0) return true;
+
+          // Objects: any truthy values = progress
+          if (parsed && typeof parsed === 'object') {
+            for (const val of Object.values(parsed)) {
+              if (val === true) return true;
+              if (typeof val === 'number' && val > 0) return true;
+              if (typeof val === 'string' && val.trim().length > 0) return true;
+              if (Array.isArray(val) && val.length > 0) return true;
+              if (val && typeof val === 'object' && Object.keys(val).length > 0) return true;
+            }
+          }
+        } catch (e) {
+          // Not JSON; any non-empty string counts as progress
+          if (String(v).trim().length > 0) return true;
+        }
+      }
+
+      // Fallback: scan all localStorage keys for “visited/treasure/stamp”
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i) || '';
+        if (!/visited|treasure|stamp/i.test(key)) continue;
+
+        const v = localStorage.getItem(key);
+        if (!v) continue;
+
+        try {
+          const parsed = JSON.parse(v);
+          if (Array.isArray(parsed) && parsed.length > 0) return true;
+          if (parsed && typeof parsed === 'object' && Object.keys(parsed).length > 0) {
+            // If it’s a map of booleans (visited), check for any true
+            if (Object.values(parsed).some(x => x === true)) return true;
+            // Otherwise any non-empty object likely indicates progress
+            return true;
+          }
+        } catch (e) {
+          if (String(v).trim().length > 0) return true;
+        }
+      }
+
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  // Update button label based on saved progress
+  if (startBtn && hasAnyProgress()) {
+    startBtn.textContent = 'Resume Quest';
+  }
 
   startBtn?.addEventListener('click', () => {
     try { sessionStorage.setItem('enteredViaSplash', '1'); } catch(e){}
