@@ -248,13 +248,14 @@ function setView(showStamps) {
   listView.classList.toggle('active', !showStamps);
   stampsView.classList.toggle('active', showStamps);
 
-  // Pirate wording – never revert to "Stamps"
   toggleBtn.textContent = showStamps ? 'Back to List' : 'Treasure';
 
+  // Only render stamps when we actually show them
   if (showStamps) renderStamps();
+
+  // Leaflet maps need a resize nudge when layout changes
   if (map) setTimeout(() => map.invalidateSize(), 150);
 }
-
 
 // ----------------------------------------------------------
 // OPEN CURRENT POOL IN NATIVE MAPS APP
@@ -351,6 +352,14 @@ function toggleStamp(poolId, animate = false) {
 
   writeVisited(visited);
 
+  // Update detail-map marker if we're looking at this pool
+  try {
+    const current = pools[selectedIndex];
+    if (map && marker && current && current.id === poolId) {
+      marker.setIcon(createDetailIcon(current));
+    }
+  } catch (e) {}
+
   // Re-render UI first so counts + buttons update immediately
   renderList();
   renderStamps(animate ? poolId : null);
@@ -382,6 +391,22 @@ function toggleStamp(poolId, animate = false) {
 // MAP SETUP + MOVEMENT
 // ----------------------------------------------------------
 
+
+function createDetailIcon(p) {
+  // Detail-map marker: X when unclaimed, treasure stamp when claimed
+  const isVisited = !!(visited[p?.id]?.done);
+  const url = isVisited ? getStampSrc(p) : './assets/marker-x.png';
+  const size = isVisited ? 44 : 36;
+
+  return L.icon({
+    iconUrl: url,
+    iconSize: [size, size],
+    iconAnchor: [size / 2, size / 2],
+    popupAnchor: [0, -size / 2 - 6]
+  });
+}
+
+
 function setupMap() {
   if (!pools.length) return;
 
@@ -392,13 +417,14 @@ function setupMap() {
     attribution: '&copy; OpenStreetMap'
   }).addTo(map);
 
-  marker = L.marker([pools[0].lat, pools[0].lng]).addTo(map);
+  marker = L.marker([pools[0].lat, pools[0].lng], { icon: createDetailIcon(pools[0]) }).addTo(map);
 }
 
 function panToSelected() {
   if (!map || !marker) return;
 
   const p = pools[selectedIndex];
+  marker.setIcon(createDetailIcon(p));
   marker.setLatLng([p.lat, p.lng]).bindPopup(p.name);
   map.setView([p.lat, p.lng], 15, { animate: true });
 }
@@ -484,7 +510,7 @@ async function init() {
 
   if (resetBtn) {
     resetBtn.addEventListener('click', () => {
-      const ok = confirm('Reset all stickers on this device?');
+      const ok = confirm('Reset all treasure on this device?');
       if (!ok) return;
 
       visited = {};
