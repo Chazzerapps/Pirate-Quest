@@ -464,6 +464,21 @@ body.full-map #map {
 .passport .stamp.pop {
   animation: pop .35s ease;
 }
+/* Tighter passport stamp layout */
+.passport {
+  padding: 8px 10px;              /* was 10px 12px */
+}
+
+.passport .stamp {
+  margin-top: 4px;                /* was 6px */
+  justify-content: center;
+}
+
+.passport .stamp img {
+  width: 96px;                    /* was 120px */
+  height: auto;
+}
+
 
 @keyframes pop {
   0%   { transform: scale(.85); }
@@ -1080,4 +1095,19 @@ body.kids.splash-body{
     font-size: 10px !important;
     margin-top: 2px !important;
   }
+   /* Tighter passport stamp layout */
+.passport {
+  padding: 8px 10px;              /* was 10px 12px */
+}
+
+.passport .stamp {
+  margin-top: 4px;                /* was 6px */
+  justify-content: center;
+}
+
+.passport .stamp img {
+  width: 96px;                    /* was 120px */
+  height: auto;
+}
+
 }
