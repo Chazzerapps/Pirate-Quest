@@ -505,46 +505,6 @@ body.full-map #map {
   box-shadow: 0 0 0 1px rgba(0,0,0,0.04);
 }
 
-
-
-/* ==========================================================================
-   ✅ FIX: SHOW 2 PASSPORT CARDS PER PAGE ON PHONE (NO SCROLL)
-   - Your JS already uses stampsPerPage = 2
-   - This CSS ensures BOTH cards fit in the visible area on iPhone
-   ========================================================================== */
-
-@media (max-width: 700px) {
-  /* Force one column + two equal-height rows */
-  .passport-grid {
-    grid-template-columns: 1fr !important;
-    grid-template-rows: 1fr 1fr;
-    gap: 14px;
-
-    /* Fit exactly two cards inside the viewport, below header + passport nav */
-    height: calc(100vh - 250px);
-    overflow: hidden;
-  }
-
-  /* Make each card distribute space nicely */
-  .passport {
-    justify-content: space-between;
-  }
-
-  /* Slightly smaller stamp so it never pushes the 2nd card off-screen */
-  .passport .stamp img {
-    width: 110px;
-  }
-}
-
-/* iPhone Safari: prefer safe viewport unit if available */
-@supports (-webkit-touch-callout: none) {
-  @media (max-width: 700px) {
-    .passport-grid {
-      height: calc(100svh - 250px);
-    }
-  }
-}
-
 /* ==========================================================================
    RESPONSIVE TWEAKS (MAIN APP)
    ========================================================================== */
@@ -1055,4 +1015,69 @@ body.kids.splash-body{
 /* Optional visual cue if you want later */
 .leaflet-marker-icon.raymond-visited {
   transform: scale(1.05);
+}
+
+
+
+/* ==========================================================================
+   ✅ FIX v2: iPhone passport view — ALWAYS show 2 cards fully
+   Notes:
+   - Your JS uses id="passportGrid". Some builds don't include class "passport-grid".
+   - These rules target BOTH #passportGrid and .passport-grid.
+   ========================================================================== */
+
+@media (max-width: 700px) {
+  /* The stamps view container must allow the grid to size itself */
+  #passportView {
+    overflow: hidden;
+  }
+
+  /* Force 1 column + 2 equal-height rows and lock the grid height */
+  #passportGrid,
+  .passport-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: 1fr 1fr !important;
+    gap: 12px !important;
+
+    /* More conservative header/nav allowance to fit on small iPhones */
+    height: calc(100svh - 320px) !important;
+    overflow: hidden !important;
+
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* Compact the cards so they fit reliably */
+  #passportGrid .passport,
+  .passport-grid .passport {
+    padding: 10px 12px !important;
+    gap: 4px !important;
+    justify-content: space-between !important;
+  }
+
+  #passportGrid .passport .title,
+  .passport-grid .passport .title {
+    font-size: 13px !important;
+    line-height: 1.15 !important;
+  }
+
+  /* Kill extra whitespace around the stamp area */
+  #passportGrid .passport .stamp,
+  .passport-grid .passport .stamp {
+    margin-top: 2px !important;
+  }
+
+  /* Smaller stamp image so card height stays under control */
+  #passportGrid .passport .stamp img,
+  .passport-grid .passport .stamp img {
+    width: 96px !important;
+    height: auto !important;
+  }
+
+  #passportGrid .passport .stamp-date,
+  .passport-grid .passport .stamp-date {
+    font-size: 10px !important;
+    margin-top: 2px !important;
+  }
 }
