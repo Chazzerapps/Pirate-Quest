@@ -1,82 +1,77 @@
 /* ==========================================================================
-   CARPE DIEM PASSPORT + HARBOUR POOLS APP STYLES
+   CARPE DIEM PASSPORT + HARBOUR POOLS APP STYLES (CLEANED)
    - Splash screen uses .splash-body
    - Main app + overview use default body styles
+   - Passport (Treasure) view: 1 stamp per page, BIG stamp
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
    GLOBAL BASE TOKENS
    -------------------------------------------------------------------------- */
 
-:root {
-  /* Deep inky navy from crest background */
-  --bg-navy: #0A1A2F;
+:root{
+  --bg-navy:#0A1A2F;
 
-  /* Foil gold tuned slightly cooler + brighter */
-  --gold:       #D1B36F;
-  --gold-mid:   #BD9A4C;
-  --gold-deep:  #8C6A2F;
+  --gold:#D1B36F;
+  --gold-mid:#BD9A4C;
+  --gold-deep:#8C6A2F;
 
-  /* Text / ink */
-  --ink: #1F2732;
+  --ink:#1F2732;
 
-  /* Accents */
-  --accent:       #071422;  /* primary accent = deep navy */
-  --accent-soft:  #E9EDF2;  /* very light neutral with tiny blue/grey */
+  --accent:#071422;
+  --accent-soft:#E9EDF2;
 
-  /* Light UI for main app */
-  --pill-bg:      #F5F2EA;
-  --pill-border:  #D8C5A0;
-  --card-bg:      #FFFFFF;
-  --card-shadow:  0 14px 35px rgba(7,20,34,.16);
+  --pill-bg:#F5F2EA;
+  --pill-border:#D8C5A0;
 
-  --radius-card:  18px;
-  --radius-pill:  999px;
+  --card-bg:#FFFFFF;
+  --card-shadow:0 14px 35px rgba(7,20,34,.16);
 
-  --name-top: 8%;
-  --page-bg: #F6F3EC;
+  --radius-card:18px;
+  --radius-pill:999px;
+
+  --name-top:8%;
+  --page-bg:#F6F3EC;
 }
 
-html,
-body {
-  height: 100%;
-  margin: 0;
-  font-family: 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  color: var(--ink);
-  background: var(--page-bg);
+html,body{
+  height:100%;
+  margin:0;
+  font-family:'Nunito',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  color:var(--ink);
+  background:var(--page-bg);
 }
 
 /* ==========================================================================
-   SPLASH PASSPORT COVER
+   SPLASH PASSPORT COVER (Adult)
    ========================================================================== */
 
-.splash-body {
-  min-height: 100vh;
-  background-color: var(--bg-navy);
-  background-image: url("carpe-diem.png");
-  background-repeat: no-repeat;
-  background-position: center 44%;
-  background-size: 78%;
-  background-attachment: fixed;
-  cursor: pointer;
-  font-family: ui-serif, Georgia, 'Times New Roman', serif;
-  color: var(--gold);
-  overscroll-behavior: contain;
-  -webkit-tap-highlight-color: transparent;
+.splash-body{
+  min-height:100vh;
+  background-color:var(--bg-navy);
+  background-image:url("carpe-diem.png");
+  background-repeat:no-repeat;
+  background-position:center 44%;
+  background-size:78%;
+  background-attachment:fixed;
+  cursor:pointer;
+  font-family:ui-serif,Georgia,'Times New Roman',serif;
+  color:var(--gold);
+  overscroll-behavior:contain;
+  -webkit-tap-highlight-color:transparent;
 }
 
-.splash-overlay {
-  position: fixed;
-  top: var(--name-top);
-  left: 0;
-  right: 0;
-  text-align: center;
-  padding: 0 12px;
-  pointer-events: none;
+.splash-overlay{
+  position:fixed;
+  top:var(--name-top);
+  left:0; right:0;
+  text-align:center;
+  padding:0 12px;
+  pointer-events:none;
 }
 
-.foil-emboss {
-  background-image: linear-gradient(
+.foil-emboss{
+  background-image:linear-gradient(
     180deg,
     rgba(255,255,255,.46) 0%,
     var(--gold) 20%,
@@ -85,1029 +80,729 @@ body {
     var(--gold) 72%,
     rgba(255,255,255,.55) 100%
   );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
   text-shadow:
     0 1px 0 rgba(255,255,255,.15),
     0 2px 0 rgba(0,0,0,.55),
     0 12px 24px rgba(0,0,0,.35);
 }
 
-.owner-name {
-  margin: 0;
-  font-weight: 900;
-  letter-spacing: .14em;
-  text-transform: capitalize;
-  font-size: clamp(24px, 3.6vw, 36px);
-  display: inline-block;
-  pointer-events: auto;
+.owner-name{
+  margin:0;
+  font-weight:900;
+  letter-spacing:.14em;
+  text-transform:capitalize;
+  font-size:clamp(24px, 3.6vw, 36px);
+  display:inline-block;
+  pointer-events:auto;
 }
 
-#btnYes {
-  background: var(--gold);
-  box-shadow:
-    inset 0 2px 4px rgba(255,255,255,.45),
-    0 2px 6px rgba(0,0,0,.45);
+#btnYes{
+  background:var(--gold);
+  box-shadow:inset 0 2px 4px rgba(255,255,255,.45), 0 2px 6px rgba(0,0,0,.45);
 }
+#btnNo{ background:rgba(210,181,111,.75); }
 
-#btnNo {
-  background: rgba(210,181,111,.75);
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translate(-50%, -55%); }
-  to   { opacity: 1; transform: translate(-50%, -50%); }
+@keyframes fadeIn{
+  from{opacity:0; transform:translate(-50%,-55%);}
+  to{opacity:1; transform:translate(-50%,-50%);}
 }
 
 /* ==========================================================================
    MAIN APP LAYOUT (Harbour Pools)
    ========================================================================== */
 
-body:not(.splash-body) {
-  background: linear-gradient(180deg, #f7f9ff 0%, #eef2ff 100%);
+body:not(.splash-body){
+  background:linear-gradient(180deg,#f7f9ff 0%,#eef2ff 100%);
 }
 
 /* --- Header / Titlebar --- */
 
-header.glass {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  backdrop-filter: blur(16px);
-  background: rgba(255,255,255,.85);
-  border-bottom: 1px solid rgba(15,32,60,.08);
+header.glass{
+  position:sticky;
+  top:0;
+  z-index:10;
+  backdrop-filter:blur(16px);
+  background:rgba(255,255,255,.85);
+  border-bottom:1px solid rgba(15,32,60,.08);
 }
 
-.titlebar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 14px;
+.titlebar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 14px;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.brand .dot{
+  width:14px; height:14px;
+  border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold-mid));
+  box-shadow:0 0 0 3px rgba(207,176,110,.25);
+}
+.brand h1{
+  margin:0;
+  font-size:20px;
+  letter-spacing:.04em;
 }
 
-.brand .dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--gold), var(--gold-mid));
-  box-shadow: 0 0 0 3px rgba(207,176,110,.25);
+.badge{
+  font-size:13px;
+  padding:4px 10px;
+  border-radius:999px;
+  background:var(--bg-navy);
+  color:var(--accent-soft);
+  box-shadow:0 5px 14px rgba(14,36,54,.45);
 }
 
-.brand h1 {
-  margin: 0;
-  font-size: 20px;
-  letter-spacing: .04em;
-}
-
-.badge {
-  font-size: 13px;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: var(--bg-navy);
-  color: var(--accent-soft);
-  box-shadow: 0 5px 14px rgba(14,36,54,.45);
-}
-
-.actions {
-  display: flex;
-  gap: 8px;
-}
+.actions{ display:flex; gap:8px; }
 
 /* --- Pills & buttons --- */
 
-button,
-.pill {
-  font-family: inherit;
-  font-size: 14px;
-  border: none;
-  cursor: pointer;
+button,.pill{
+  font-family:inherit;
+  font-size:14px;
+  border:none;
+  cursor:pointer;
 }
 
-.pill {
-  padding: 6px 14px;
-  border-radius: var(--radius-pill);
-  background: var(--pill-bg);
-  border: 1px solid var(--pill-border);
-  color: var(--ink);
-  box-shadow: 0 1px 0 rgba(255,255,255,.8);
+.pill{
+  padding:6px 14px;
+  border-radius:var(--radius-pill);
+  background:var(--pill-bg);
+  border:1px solid var(--pill-border);
+  color:var(--ink);
+  box-shadow:0 1px 0 rgba(255,255,255,.8);
 }
 
-.pill.primary {
-  background: var(--bg-navy);
-  color: var(--accent-soft);
-  border-color: var(--bg-navy);
-  box-shadow:
-    0 8px 18px rgba(14,36,54,.35),
-    inset 0 1px 0 rgba(255,255,255,.4);
+.pill.primary{
+  background:var(--bg-navy);
+  color:var(--accent-soft);
+  border-color:var(--bg-navy);
+  box-shadow:0 8px 18px rgba(14,36,54,.35), inset 0 1px 0 rgba(255,255,255,.4);
 }
-
-.pill.ghost {
-  background: transparent;
-  border-color: rgba(15,32,60,.25);
+.pill.ghost{
+  background:transparent;
+  border-color:rgba(15,32,60,.25);
 }
-
-a.pill {
-  text-decoration: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+a.pill{
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
 }
 
 /* --- Layout containers --- */
 
-main {
-  padding: 12px 10px 20px;
+main{ padding:12px 10px 20px; }
+
+.view{ display:none; }
+.view.active{ display:block; }
+
+.controls{
+  display:flex;
+  gap:6px;
+  margin-bottom:8px;
 }
 
-.view {
-  display: none;
+.content-split{
+  display:grid;
+  grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);
+  gap:10px;
 }
 
-.view.active {
-  display: block;
-}
-
-.controls {
-  display: flex;
-  gap: 6px;
-  margin-bottom: 8px;
-}
-
-.content-split {
-  display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  gap: 10px;
-}
-
-/* --- Cards --- */
-
-.card {
-  background: var(--card-bg);
-  border-radius: var(--radius-card);
-  box-shadow: var(--card-shadow);
-  padding: 12px 12px 10px;
+.card{
+  background:var(--card-bg);
+  border-radius:var(--radius-card);
+  box-shadow:var(--card-shadow);
+  padding:12px 12px 10px;
 }
 
 /* ==========================================================================
-   POOL LIST (LEFT COLUMN)
+   POOL LIST
    ========================================================================== */
 
-#poolList {
-  max-height: 120px;
-  overflow: hidden;
+#poolList{
+  max-height:120px;
+  overflow:hidden;
 }
 
-.pool-item {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 8px 6px;
-  border-bottom: 1px solid rgba(15,32,60,.06);
+.pool-item{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  padding:8px 6px;
+  border-bottom:1px solid rgba(15,32,60,.06);
+}
+.pool-item:last-child{ border-bottom:none; }
+
+.pool-name{
+  font-weight:700;
+  font-size:16px;
 }
 
-.pool-item:last-child {
-  border-bottom: none;
+.coords{
+  font-size:12px;
+  color:#6c7486;
 }
 
-.pool-name {
-  font-weight: 700;
-  font-size: 16px;
+.row-selected{ background:rgba(14,36,54,.06); }
+
+.stamp-chip{ white-space:nowrap; }
+.stamp-chip.stamped{
+  background:var(--gold);
+  color:#2A1E08;
+  border-color:var(--gold-deep);
 }
-
-.coords {
-  font-size: 12px;
-  color: #6c7486;
-}
-
-.stamp-chip {
-  white-space: nowrap;
-}
-
-.stamp-chip.stamped {
-  background: var(--gold);
-  color: #2A1E08;
-  border-color: var(--gold-deep);
-}
-
-
-
-.row-selected {
-  background: rgba(14,36,54,.06);
+.stamp-chip.cta{
+  background:var(--bg-navy);
+  color:var(--accent-soft);
+  font-weight:800;
 }
 
 /* ==========================================================================
-   MAP PANEL (RIGHT COLUMN)
+   MAP PANEL
    ========================================================================== */
 
-.map-wrap {
-  position: relative;
-  padding-bottom: 38px;
+.map-wrap{
+  position:relative;
+  padding-bottom:38px;
 }
 
-.map-wrap #map {
-  border-radius: 14px;
-  overflow: hidden;
+#map{
+  width:100%;
+  min-height:320px;
+  border-radius:18px;
+  overflow:hidden;
 }
 
-/* Map fine-tuning */
-
-.pool-map {
-  height: 60vh;
-  min-height: 320px;
+.pool-map{
+  height:60vh;
+  min-height:320px;
 }
 
-.map-actions {
-  position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: 6px;
-  display: flex;
-  justify-content: space-between;
-  gap: 6px;
-  pointer-events: none;
+.map-actions{
+  position:absolute;
+  left:12px; right:12px;
+  bottom:6px;
+  display:flex;
+  justify-content:space-between;
+  gap:6px;
+  pointer-events:none;
+}
+.map-actions .pill{ pointer-events:auto; }
+.map-actions .small{
+  font-size:12px;
+  padding:6px 10px;
 }
 
-.map-actions .pill {
-  pointer-events: auto;
+.leaflet-control-zoom{
+  margin-top:6px !important;
+  margin-left:6px !important;
 }
 
-.map-actions .small {
-  font-size: 12px;
-  padding-inline: 10px;
-  padding-block: 6px;
+.map-toggle{
+  position:absolute;
+  left:50%;
+  bottom:6px;
+  transform:translateX(-50%);
 }
 
-.leaflet-control-zoom {
-  margin-top: 6px !important;
-  margin-left: 6px !important;
-}
-
-.map-toggle {
-  position: absolute;
-  left: 50%;
-  bottom: 6px;
-  transform: translateX(-50%);
-}
-
-/* Full map toggle for desktop */
-
-body.full-map .content-split {
-  display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-  gap: 10px;
-}
-
-body.full-map #poolList {
-  max-height: 120px;
-  overflow: hidden;
-}
-
-body.full-map .map-wrap.card {
-  height: calc(100vh - 140px);
-}
-
-body.full-map #map {
-  height: 100% !important;
-}
+/* Full map toggle (desktop) */
+body.full-map .map-wrap.card{ height:calc(100vh - 140px); }
+body.full-map #map{ height:100% !important; }
 
 /* ==========================================================================
-   PASSPORT GRID (STAMPS VIEW)
+   PASSPORT (TREASURE) VIEW — ONE BIG STAMP PER PAGE
    ========================================================================== */
 
-.subtitle {
-  margin: 10px 2px 6px;
-  font-size: 16px;
-  font-weight: 800;
+.subtitle{
+  margin:10px 2px 6px;
+  font-size:16px;
+  font-weight:800;
 }
 
-.passport-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 10px;
-  max-width: 600px;
-  margin: 0 auto;
+/* IMPORTANT: Your JS uses id="passportGrid". Keep both selectors. */
+#passportGrid,
+.passport-grid{
+  display:grid;
+  grid-template-columns:1fr;   /* one card per page */
+  gap:12px;
+  max-width:560px;
+  margin:0 auto;
 }
 
 /* Passport pagination controls */
-
-.passport-nav {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin: 8px 0 12px;
+.passport-nav{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin:8px 0 12px;
+}
+.passport-nav .page-label{
+  font-size:13px;
+  font-weight:600;
+  color:#4a5263;
+}
+.passport-nav button[disabled]{
+  opacity:.45;
+  cursor:default;
+  box-shadow:none;
 }
 
-.passport-nav .page-label {
-  font-size: 13px;
-  font-weight: 600;
-  color: #4a5263;
+.passport{
+  background:#fff;
+  border-radius:18px;
+  padding:16px 14px;
+  box-shadow:0 8px 20px rgba(19,46,89,.18);
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+
+  /* hero layout */
+  align-items:center;
+  text-align:center;
 }
 
-.passport-nav button[disabled] {
-  opacity: .45;
-  cursor: default;
-  box-shadow: none;
+.passport .title{
+  font-weight:800;
+  font-size:16px;
 }
 
-.passport {
-  background: #fff;
-  border-radius: 18px;
-  padding: 10px 12px;
-  box-shadow: 0 8px 20px rgba(19,46,89,.18);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+.passport .hint{ font-size:12px; color:#6c7486; }
+
+.passport .stamp{
+  margin:10px 0 6px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
 }
 
-.passport .title {
-  font-weight: 700;
-  font-size: 14px;
+/* BIG stamp */
+.passport .stamp img{
+  width:min(280px, 78vw);
+  height:auto;
+  display:block;
 }
 
-.passport .hint {
-  font-size: 12px;
-  color: #6c7486;
+.passport .stamp.pop{ animation:pop .35s ease; }
+@keyframes pop{
+  0%{transform:scale(.85);}
+  60%{transform:scale(1.08);}
+  100%{transform:scale(1);}
 }
 
-.passport .stamp {
-  margin-top: 6px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  position: relative; /* for on-stamp date */
+.stamp-date{
+  font-size:12px;
+  font-weight:700;
+  color:#6c7486;
+  letter-spacing:.05em;
+  margin-top:2px;
 }
 
-
-
-/* Make passport stamps larger */
-.passport .stamp img {
-  width: 120px;      /* was ~80px */
-  height: auto;
+/* Optional on-stamp date label (if you ever use it) */
+.passport .stamp .stamp-date.on-stamp{
+  position:absolute;
+  bottom:6px;
+  right:10px;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:#4b5569;
+  opacity:.9;
+  transform:rotate(-14deg);
+  background:rgba(255,255,255,0.45);
+  padding:2px 6px;
+  border-radius:999px;
+  box-shadow:0 0 0 1px rgba(0,0,0,0.04);
 }
 
-.passport .stamp .label {
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: .1em;
+/* Empty slots (if used anywhere) */
+.passport.passport-empty{
+  background:transparent;
+  box-shadow:none;
+  border:2px dashed rgba(15,32,60,.18);
+  min-height:120px;
+  justify-content:center;
 }
-
-.passport .stamp.pop {
-  animation: pop .35s ease;
-}
-/* Tighter passport stamp layout */
-.passport {
-  padding: 8px 10px;              /* was 10px 12px */
-}
-
-.passport .stamp {
-  margin-top: 4px;                /* was 6px */
-  justify-content: center;
-}
-
-.passport .stamp img {
-  width: 96px;                    /* was 120px */
-  height: auto;
-}
-
-
-@keyframes pop {
-  0%   { transform: scale(.85); }
-  60%  { transform: scale(1.08); }
-  100% { transform: scale(1); }
-}
-
-.hint {
-  font-size: 12px;
-  color: #6c7486;
-  margin-top: 4px;
-}
-
-/* Stamp date (list + on-stamp overlay) */
-
-.stamp-date {
-  font-size: 11px;
-  font-weight: 600;
-  color: #6c7486;
-  letter-spacing: .05em;
-  margin-top: 2px;
-  cursor: pointer;
-}
-
-.passport .stamp .stamp-date.on-stamp {
-  position: absolute;
-  bottom: 4px;
-  right: -4px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: #4b5569;
-  opacity: 0.9;
-  transform: rotate(-14deg);
-  background: rgba(255,255,255,0.4);
-  padding: 2px 6px;
-  border-radius: 999px;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.04);
+.passport-empty-slot{
+  width:100%;
+  min-height:90px;
+  border-radius:14px;
 }
 
 /* ==========================================================================
    RESPONSIVE TWEAKS (MAIN APP)
    ========================================================================== */
 
-@media (max-width: 700px) {
-  .titlebar {
-    flex-wrap: wrap;
-    gap: 6px;
+@media (max-width:700px){
+  .titlebar{ flex-wrap:wrap; gap:6px; }
+  .titlebar .actions{
+    margin-left:auto;
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .titlebar .actions .pill{
+    padding-inline:10px;
+    font-size:13px;
   }
 
-  .titlebar .actions {
-    margin-left: auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
+  body{ overflow:hidden; }
+  main{
+    height:calc(100vh - 60px);
+    padding-bottom:10px;
+    box-sizing:border-box;
   }
 
-  .titlebar .actions .pill {
-    padding-inline: 10px;
-    font-size: 13px;
+  .content-split{
+    display:flex;
+    flex-direction:column;
+    height:100%;
   }
 
-  body {
-    overflow: hidden;
+  #poolList{
+    max-height:120px;
+    flex:0 0 auto;
   }
 
-  main {
-    height: calc(100vh - 60px);
-    padding-bottom: 10px;
-    box-sizing: border-box;
+  .map-wrap{
+    flex:1 1 auto;
+    margin-top:8px;
   }
 
-  .content-split {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  .pool-map,
+  #map{
+    height:100% !important;
+    min-height:320px !important;
   }
 
-  #poolList {
-    max-height: 120px;
-    flex: 0 0 auto;
-  }
-
-  .map-wrap {
-    flex: 1 1 auto;
-    margin-top: 8px;
-  }
-
-  .pool-map {
-    height: 100% !important;
-    min-height: 320px !important;
-  }
-
-  .map-wrap #map {
-    height: 100% !important;
-  }
+  /* Keep stamp big, but a touch smaller on very small screens */
+  .passport .stamp img{ width:min(260px, 82vw); }
 }
 
-/* --- iPhone Safari map height fix --- */
-@supports (-webkit-touch-callout: none) {
-  main {
-    height: auto !important;
-    min-height: calc(100vh - 120px) !important;
+/* iPhone Safari map height fix */
+@supports (-webkit-touch-callout:none){
+  main{
+    height:auto !important;
+    min-height:calc(100vh - 120px) !important;
   }
-
-  .content-split {
-    display: flex !important;
-    flex-direction: column !important;
-    height: auto !important;
-    min-height: calc(100vh - 160px) !important;
+  .content-split{
+    display:flex !important;
+    flex-direction:column !important;
+    height:auto !important;
+    min-height:calc(100vh - 160px) !important;
   }
-
-  .map-wrap {
-    flex: 1 1 auto !important;
-    min-height: 300px !important;
+  .map-wrap{
+    flex:1 1 auto !important;
+    min-height:300px !important;
   }
-
-  #map {
-    height: 100% !important;
-    min-height: 300px !important;
+  #map{
+    height:100% !important;
+    min-height:300px !important;
   }
 }
 
 /* ==========================================================================
-   NAME → BIG ARROWS → MAP BLOCK
+   BIG ARROWS (if used)
    ========================================================================== */
 
-.map-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.pool-header {
-  margin-bottom: 4px;
-}
-
-.controls.arrow-controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin: 4px 0 8px;
+.controls.arrow-controls{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  width:100%;
+  margin:4px 0 8px;
   padding:0;
 }
 
-/* Circular arrow buttons */
-.arrow-btn {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid var(--pill-border);
-  background: var(--pill-bg);
-  box-shadow:
-    0 8px 18px rgba(14,36,54,.18),
-    inset 0 1px 0 rgba(255,255,255,.85);
-  font-size: 32px;
-  cursor: pointer;
-}
-
-/* Legacy big arrow pill class (kept for compatibility) */
-.arrow-pill {
-  font-size: 40px;
-  padding: 10px 22px;
-  border-radius: 999px;
-}
-
-/* Map base size (ensures clean layout under arrows) */
-#map,
-.pool-map {
-  width: 100%;
-  min-height: 320px;
-  border-radius: 18px;
-  overflow: hidden;
-}
-
-/* Tighter padding on small screens for arrows */
-
-@media (max-width: 700px) {
-  .controls.arrow-controls {
-   padding:0;
-  }
+.arrow-btn{
+  width:72px;
+  height:72px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--pill-border);
+  background:var(--pill-bg);
+  box-shadow:0 8px 18px rgba(14,36,54,.18), inset 0 1px 0 rgba(255,255,255,.85);
+  font-size:32px;
+  cursor:pointer;
 }
 
 /* ==========================================================================
-   OVERVIEW PAGE STYLES
+   OVERVIEW PAGE
    ========================================================================== */
 
-.overview-body {
-  background: linear-gradient(180deg, #f7f9ff 0%, #eef2ff 100%);
+.overview-body{
+  background:linear-gradient(180deg,#f7f9ff 0%,#eef2ff 100%);
 }
 
-.overview-main {
-  padding: 12px 10px 20px;
-  min-height: calc(100vh - 60px);
-  box-sizing: border-box;
+.overview-main{
+  padding:12px 10px 20px;
+  min-height:calc(100vh - 60px);
+  box-sizing:border-box;
 }
 
-.overview-card {
-  max-width: 900px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+.overview-card{
+  max-width:900px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
 }
 
-.overview-header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 4px;
+.overview-header-row{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  margin-bottom:4px;
 }
 
-.overview-text h2 {
-  margin: 0;
-  font-size: 18px;
-  letter-spacing: .06em;
-  text-transform: uppercase;
+.overview-text h2{
+  margin:0;
+  font-size:18px;
+  letter-spacing:.06em;
+  text-transform:uppercase;
 }
 
-.overview-subtext {
-  margin: 2px 0 0;
-  font-size: 13px;
-  color: #6c7486;
+.overview-subtext{
+  margin:2px 0 0;
+  font-size:13px;
+  color:#6c7486;
 }
 
-#overviewMap {
-  width: 100%;
-  height: 420px;
-  border-radius: 14px;
-  overflow: hidden;
+#overviewMap{
+  width:100%;
+  height:420px;
+  border-radius:14px;
+  overflow:hidden;
 }
 
-.overview-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  font-size: 12px;
-  color: #6c7486;
-  margin-top: 6px;
+.overview-legend{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  font-size:12px;
+  color:#6c7486;
+  margin-top:6px;
 }
 
-.legend-item {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
+.legend-item{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+}
+.legend-dot{
+  width:10px; height:10px;
+  border-radius:50%;
+  display:inline-block;
+}
+.legend-dot-visited{ background-color:var(--gold); }
+.legend-dot-notvisited{ background-color:#6c8ab4; }
+
+@media (max-width:700px){
+  .overview-main{ padding:10px 8px 16px; }
+  #overviewMap{ height:calc(100vh - 200px); }
+  .arrow-btn.left{ margin-left:32px; }
+  .arrow-btn.right{ margin-right:32px; }
 }
 
-.legend-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  display: inline-block;
+/* ==========================================================================
+   MAP ACTION BUTTONS (Top row)
+   ========================================================================== */
+
+.map-block{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
 }
-
-.legend-dot-visited {
-  background-color: var(--gold);
+.map-actions-top{
+  display:flex;
+  justify-content:flex-start;
+  gap:10px;
+  padding:8px 4px;
 }
-
-.legend-dot-notvisited {
-  background-color: #6c8ab4;
+.map-actions-top button{
+  background:var(--pill-bg);
+  border:1px solid var(--pill-border);
+  padding:6px 12px;
+  border-radius:12px;
+  font-size:.75rem;
+  color:var(--ink);
+  box-shadow:0 1px 2px rgba(0,0,0,0.12);
 }
-
-
-/* Responsive tweaks for overview */
-
-@media (max-width: 700px) {
-  .overview-main {
-    padding: 10px 8px 16px;
-  }
-
-   
-
-  #overviewMap {
-    height: calc(100vh - 200px);
-  }
-   /* Left arrow: space from left edge */
-   .arrow-btn.left { margin-left:32px;
-   }
-   /* Right arrow: space from right edge */
-   .arrow-btn.right { margin-right:32px;
-   }
-                   
-}
-
-/* ================================
-   RAYMOND MAP MARKERS (OVERVIEW)
-   ================================ */
-
-
-
-/* ================================
-   MAP ACTION BUTTONS — FIXED TOP
-   ================================ */
-
-.map-block {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.map-actions-top {
-  display: flex;
-  justify-content: flex-start;
-  gap: 10px;
-  padding: 8px 4px;
-}
-
-.map-actions-top button {
-  background: var(--pill-bg, #F5F2EA);
-  border: 1px solid var(--pill-border, #D8C5A0);
-  padding: 6px 12px;
-  border-radius: 12px;
-  font-size: 0.75rem;
-  color: var(--ink, #1F2732);
-  box-shadow: 0 1px 2px rgba(0,0,0,0.12);
-}
-
 
 /* ==========================================================================
    NAV BAR (Prev / Next + Map buttons)
    ========================================================================== */
 
-.nav-bar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin: 10px 0 12px;
+.nav-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin:10px 0 12px;
 }
 
-.nav-big {
-  flex: 1;
-  padding: 12px 0;
-  background: var(--accent-soft);
-  border-radius: 18px;
-  font-size: 1rem;
-  font-weight: 700;
-  border: none;
-  box-shadow: 0 2px 6px rgba(0,0,0,.15);
-  color: var(--ink);
+.nav-big{
+  flex:1;
+  padding:12px 0;
+  background:var(--accent-soft);
+  border-radius:18px;
+  font-size:1rem;
+  font-weight:700;
+  border:none;
+  box-shadow:0 2px 6px rgba(0,0,0,.15);
+  color:var(--ink);
 }
 
-.nav-middle {
-  display: flex;
-  gap: 10px;
-  flex-shrink: 0;
+.nav-middle{
+  display:flex;
+  gap:10px;
+  flex-shrink:0;
 }
 
-.map-small {
-  background: var(--pill-bg);
-  border: 1px solid var(--pill-border);
-  padding: 6px 12px;
-  font-size: 0.75rem;
-  border-radius: 10px;
-  color: var(--ink);
-  white-space: nowrap;
-  box-shadow: 0 1px 2px rgba(0,0,0,.12);
+.map-small{
+  background:var(--pill-bg);
+  border:1px solid var(--pill-border);
+  padding:6px 12px;
+  font-size:.75rem;
+  border-radius:10px;
+  color:var(--ink);
+  white-space:nowrap;
+  box-shadow:0 1px 2px rgba(0,0,0,.12);
 }
-
 
 /* ==========================================================================
-   PASSPORT EMPTY SLOTS (show nothing until visited)
+   FATAL ERROR BANNER
    ========================================================================== */
 
-.passport.passport-empty {
-  background: transparent;
-  box-shadow: none;
-  border: 2px dashed rgba(15,32,60,.18);
-  min-height: 120px;
-  justify-content: center;
-  align-items: center;
-}
-
-.passport-empty-slot {
-  width: 100%;
-  height: 100%;
-  min-height: 90px;
-  border-radius: 14px;
-}
-
-
-/* Clear primary action for marking a pool as visited */
-.stamp-chip.cta {
-  background: var(--bg-navy);
-  color: var(--accent-soft);
-  font-weight: 800;
-}
-
-/* --------------------------------------------------------------------------
-   FATAL ERROR BANNER (shown when pools.json fails to load)
-   -------------------------------------------------------------------------- */
 .fatal-error{
-  margin: 14px 0;
-  padding: 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(0,0,0,.12);
-  background: #fff;
-  box-shadow: 0 8px 20px rgba(0,0,0,.08);
+  margin:14px 0;
+  padding:14px;
+  border-radius:14px;
+  border:1px solid rgba(0,0,0,.12);
+  background:#fff;
+  box-shadow:0 8px 20px rgba(0,0,0,.08);
 }
-.fatal-error-title{
-  font-weight: 800;
-  margin-bottom: 6px;
-}
-.fatal-error-msg{
-  margin-bottom: 8px;
-  opacity: .9;
-}
-.fatal-error-hint{
-  font-size: 13px;
-  line-height: 1.35;
-  opacity: .85;
-}
+.fatal-error-title{ font-weight:800; margin-bottom:6px; }
+.fatal-error-msg{ margin-bottom:8px; opacity:.9; }
+.fatal-error-hint{ font-size:13px; line-height:1.35; opacity:.85; }
 
-
-/* =========================================================
-   RAYMOND’S SWIM QUEST — STORYBOOK SPLASH
-   ========================================================= */
+/* ==========================================================================
+   KIDS STORYBOOK SPLASH
+   ========================================================================== */
 
 body.kids.splash-body{
-  /* Kids version: keep the whole screen “storybook paper” (no navy showing) */
-  background: #fffdf6; /* storybook paper */
-  cursor: default;
+  background:#fffdf6;
+  cursor:default;
 }
 
-/* Storybook “page” */
 .kids .splash-card{
-  width: 100%;
-  min-height: 100svh;          /* iOS-safe full height */
-  margin: 0;
+  width:100%;
+  min-height:100svh;
+  margin:0;
+  padding:36px 20px 56px;
+  box-sizing:border-box;
 
-  /* Comfortable breathing room on phones */
-  padding: 36px 20px 56px;     /* extra bottom padding = nicer visual centering */
-  box-sizing: border-box;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
 
-  /* True centering */
-  display: flex;
-  flex-direction: column;
-  align-items: center;         /* horizontal centering */
-  justify-content: center;     /* vertical centering */
-  gap: 14px;
-
-  text-align: center;
-
-  background: #fffdf6;         /* storybook paper */
-  border-radius: 0;
-  border: none;
-  box-shadow: none;
+  text-align:center;
+  background:#fffdf6;
+  border-radius:0;
+  border:none;
+  box-shadow:none;
 }
 
-
-/* Title stays calm and readable */
 .kids .splash-title{
-  font-size: 1.75rem;
-  line-height: 1.15;
-  margin: 0;
-  color: #0A1A2F;
+  font-size:1.75rem;
+  line-height:1.15;
+  margin:0;
+  color:#0A1A2F;
 }
 
-/* Name feels like a storybook badge */
 .kids .kid-name{
-  display: inline-block;
-  padding: 6px 14px;
-  margin: 2px auto 10px; /* tighter = better centring */
-  font-weight: 800;
-  letter-spacing: .06em;
-  text-transform: uppercase;
-  font-size: 0.9rem;
-  color: #0A1A2F;
-  background: rgba(78,198,198,.18);
-  border: 1px solid rgba(10,26,47,.12);
-  border-radius: 999px;
+  display:inline-block;
+  padding:6px 14px;
+  margin:2px auto 10px;
+  font-weight:800;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  font-size:.9rem;
+  color:#0A1A2F;
+  background:rgba(78,198,198,.18);
+  border:1px solid rgba(10,26,47,.12);
+  border-radius:999px;
 }
 
-/* Raymond becomes a sticker character */
 .kids .splash-mascot{
-  width: min(240px, 68vw);  /* scales on small phones */
-  margin: 0 auto;
-  transform: rotate(-1.5deg);
+  width:min(240px, 68vw);
+  margin:0 auto;
+  transform:rotate(-1.5deg);
 }
-
 .kids .splash-mascot img{
-  width: 100%;
-  border-radius: 22px;
-  outline: 10px solid rgba(255,255,255,.92);
-  outline-offset: -10px;
-  box-shadow: 0 16px 30px rgba(0,0,0,.24);
+  width:100%;
+  border-radius:22px;
+  outline:10px solid rgba(255,255,255,.92);
+  outline-offset:-10px;
+  box-shadow:0 16px 30px rgba(0,0,0,.24);
 }
 
-/* Gentle story line */
 .kids .splash-subtitle{
-  font-size: 1rem;
-  color: #445;
-  margin: 0 0 6px;
+  font-size:1rem;
+  color:#445;
+  margin:0 0 6px;
 }
 
-/* Friendly primary action */
 .kids .splash-start{
-  width: 100%;
-  max-width: 340px;
-  padding: 14px 18px;
-  font-size: 1.1rem;
-  border-radius: 999px;
-  border: none;
-  background: #4EC6C6;
-  color: #0A1A2F;
-  font-weight: 800;
-  box-shadow: 0 10px 18px rgba(78,198,198,.35);
+  width:100%;
+  max-width:340px;
+  padding:14px 18px;
+  font-size:1.1rem;
+  border-radius:999px;
+  border:none;
+  background:#4EC6C6;
+  color:#0A1A2F;
+  font-weight:800;
+  box-shadow:0 10px 18px rgba(78,198,198,.35);
 }
-
-.kids .splash-start:active{
-  transform: scale(.985);
-}
-
-/* =========================================================
-   RAYMOND PNG MAP MARKERS — iOS SAFE
-   ========================================================= */
-
-/* Let Leaflet control the icon box completely */
-.leaflet-marker-icon {
-  background: none !important;
-  border: none !important;
-  border-radius: 0 !important;
-}
-
-/* No shadow image */
-.leaflet-marker-shadow {
-  display: none !important;
-}
-
-/* Ensure PNG fills icon box exactly */
-.leaflet-marker-icon img {
-  width: 100% !important;
-  height: 100% !important;
-  display: block;
-  pointer-events: none;
-}
-
-/* Subtle depth without blue ring */
-.leaflet-marker-icon.raymond-notvisited,
-.leaflet-marker-icon.raymond-visited {
-  filter: drop-shadow(0 3px 4px rgba(0,0,0,0.35));
-}
-
-/* Optional visual cue if you want later */
-.leaflet-marker-icon.raymond-visited {
-  transform: scale(1.05);
-}
-
-
+.kids .splash-start:active{ transform:scale(.985); }
 
 /* ==========================================================================
-   ✅ FIX v2: iPhone passport view — ALWAYS show 2 cards fully
-   Notes:
-   - Your JS uses id="passportGrid". Some builds don't include class "passport-grid".
-   - These rules target BOTH #passportGrid and .passport-grid.
+   LEAFLET PNG MARKERS — iOS SAFE (no white box / no shadow)
    ========================================================================== */
 
-@media (max-width: 700px) {
-  /* The stamps view container must allow the grid to size itself */
-  #passportView {
-    overflow: hidden;
-  }
-
-  /* Force 1 column + 2 equal-height rows and lock the grid height */
-  #passportGrid,
-  .passport-grid {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    grid-template-rows: 1fr 1fr !important;
-    gap: 12px !important;
-
-    /* More conservative header/nav allowance to fit on small iPhones */
-    height: calc(100svh - 320px) !important;
-    overflow: hidden !important;
-
-    max-width: 520px;
-    margin: 0 auto;
-  }
-
-  /* Compact the cards so they fit reliably */
-  #passportGrid .passport,
-  .passport-grid .passport {
-    padding: 10px 12px !important;
-    gap: 4px !important;
-    justify-content: space-between !important;
-  }
-
-  #passportGrid .passport .title,
-  .passport-grid .passport .title {
-    font-size: 13px !important;
-    line-height: 1.15 !important;
-  }
-
-  /* Kill extra whitespace around the stamp area */
-  #passportGrid .passport .stamp,
-  .passport-grid .passport .stamp {
-    margin-top: 2px !important;
-  }
-
-  /* Smaller stamp image so card height stays under control */
-  #passportGrid .passport .stamp img,
-  .passport-grid .passport .stamp img {
-    width: 96px !important;
-    height: auto !important;
-  }
-
-  #passportGrid .passport .stamp-date,
-  .passport-grid .passport .stamp-date {
-    font-size: 10px !important;
-    margin-top: 2px !important;
-  }
-   /* Tighter passport stamp layout */
-.passport {
-  padding: 8px 10px;              /* was 10px 12px */
+.leaflet-marker-icon{
+  background:none !important;
+  border:none !important;
+  border-radius:0 !important;
 }
-
-.passport .stamp {
-  margin-top: 4px;                /* was 6px */
-  justify-content: center;
+.leaflet-marker-shadow{ display:none !important; }
+.leaflet-marker-icon img{
+  width:100% !important;
+  height:100% !important;
+  display:block;
+  pointer-events:none;
 }
-
-.passport .stamp img {
-  width: 96px;                    /* was 120px */
-  height: auto;
+.leaflet-marker-icon.raymond-notvisited,
+.leaflet-marker-icon.raymond-visited{
+  filter:drop-shadow(0 3px 4px rgba(0,0,0,0.35));
 }
-
-}
+.leaflet-marker-icon.raymond-visited{ transform:scale(1.05); }
