@@ -39,48 +39,55 @@
       <span id="countBadge" class="badge">0 / 0</span>
 
       <div class="actions">
-        <button id="toggleBtn" class="pill primary" title="Toggle Stamps/List">Treasure</button>
-
-        <!-- Reset stays in header, but JS will show it only in Treasure view -->
-        <button id="resetBtn" class="pill ghost" title="Reset treasure" style="display:none;">
-          Reset Treasure
-        </button>
-
+        <button id="toggleBtn" class="pill primary" title="Toggle Stamps/List">My Treasure</button>
+        <button id="resetBtn" class="pill ghost" title="Reset treasure">Reset Treasure</button>
         <a href="index.html" class="pill ghost" title="Exit app">Exit</a>
       </div>
     </div>
   </header>
 
   <main>
-    <!-- LIST VIEW -->
+    <!--
+      LIST VIEW
+      =========
+      • Shows one pool at a time (name + "Not yet / Stamped" chip)
+      • Big arrows jump to the previous / next pool
+      • Map zooms and pans to the selected pool
+    -->
     <section id="listView" class="view active">
       <div class="map-wrap card main-layout">
         <div id="poolList" class="pool-header"></div>
 
         <div class="nav-bar">
           <button id="btnDown" class="nav-big" aria-label="Previous pool">Prev</button>
-
-
-          <button id="btnUp" class="nav-big" aria-label="Next pool">Next</button>
+<button id="btnUp" class="nav-big" aria-label="Next pool">Next</button>
         </div>
 
         <div id="map" class="pool-map"></div>
       </div>
     </section>
 
-    <!-- STAMPS VIEW -->
+
+    <!--
+      STAMPS VIEW
+      ===========
+      • Shows a paged grid of "passport" cards
+      • Each card has the pool name, stamp icon, and (optional) visit date
+    -->
     <section id="passportView" class="view">
+  
       <div class="passport-nav">
         <button id="prevPassportPage" class="pill ghost">&laquo; Prev</button>
         <span id="passportPageLabel" class="page-label">Page 1 of 4</span>
         <button id="nextPassportPage" class="pill ghost">Next &raquo;</button>
       </div>
       <div id="passportGrid" class="passport-grid"></div>
+
     </section>
   </main>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <!-- Main app logic as an ES module -->
   <script type="module" src="app.js"></script>
 </body>
 </html>
-
