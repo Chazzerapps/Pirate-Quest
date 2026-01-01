@@ -308,10 +308,7 @@ function renderList() {
 
     <div class="pool-left">
       <div class="pool-name">${p.name}</div>
-      <div class="pool-inline-actions">
-        <button class="map-small inline" type="button" data-action="open-maps">Open in Maps</button>
-        <button class="map-small inline" type="button" data-action="full-map">Full Map</button>
-      </div>
+      
     </div>
     <button class="stamp-chip ${stamped ? 'stamped' : 'cta'}" data-id="${p.id}">
       ${
