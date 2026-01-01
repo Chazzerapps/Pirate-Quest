@@ -70,10 +70,8 @@ const stampsView      = document.getElementById('passportView');
 const toggleBtn       = document.getElementById('toggleBtn');
 const resetBtn        = document.getElementById('resetBtn');
 const countBadge      = document.getElementById('countBadge');
-const mapToggle       = document.getElementById('mapToggle');
 const prevStampsPageBtn = document.getElementById('prevPassportPage');
 const nextStampsPageBtn = document.getElementById('nextPassportPage');
-const openNativeMapBtn = document.getElementById('openNativeMap');
 
 const btnUp        = document.getElementById('btnUp');
 const btnDown      = document.getElementById('btnDown');
@@ -248,7 +246,10 @@ function setView(showStamps) {
   listView.classList.toggle('active', !showStamps);
   stampsView.classList.toggle('active', showStamps);
 
-  toggleBtn.textContent = showStamps ? 'Back to List' : 'Treasure';
+  toggleBtn.textContent = showStamps ? 'Back to List' : 'My Treasure';
+
+  // Only show Reset on the treasure (stamps) page
+  if (resetBtn) resetBtn.style.display = showStamps ? '' : 'none';
 
   // Only render stamps when we actually show them
   if (showStamps) renderStamps();
@@ -304,8 +305,13 @@ function renderList() {
   row.className = 'pool-item row-selected';
 
   row.innerHTML = `
-    <div>
+
+    <div class="pool-left">
       <div class="pool-name">${p.name}</div>
+      <div class="pool-inline-actions">
+        <button class="map-small inline" type="button" data-action="open-maps">Open in Maps</button>
+        <button class="map-small inline" type="button" data-action="full-map">Full Map</button>
+      </div>
     </div>
     <button class="stamp-chip ${stamped ? 'stamped' : 'cta'}" data-id="${p.id}">
       ${
@@ -314,11 +320,12 @@ function renderList() {
           : '🏴‍☠️ Claim Treasure'
       }
     </button>
+
   `;
 
   // Clicking the row pans the map
   row.addEventListener('click', (e) => {
-    if (e.target.classList.contains('stamp-chip')) return;
+    if (e.target.closest('.stamp-chip') || e.target.closest('button[data-action]')) return;
     panToSelected();
   });
 
@@ -510,7 +517,7 @@ async function init() {
 
   if (resetBtn) {
     resetBtn.addEventListener('click', () => {
-      const ok = confirm('Reset all treasure on this device?');
+      const ok = confirm('Reset all treasure on this device, First Mate?');
       if (!ok) return;
 
       visited = {};
@@ -544,14 +551,25 @@ async function init() {
     });
   }
 
-  if (openNativeMapBtn) {
-    openNativeMapBtn.addEventListener('click', openInNativeMaps);
-  }
 
-  if (mapToggle) {
-    mapToggle.addEventListener('click', () => {
-      document.body.classList.toggle('full-map');
-      if (map) setTimeout(() => map.invalidateSize(), 150);
+  // Inline map action buttons (rendered inside the pool header)
+  if (listView) {
+    listView.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-action]');
+      if (!btn) return;
+      e.stopPropagation();
+      const action = btn.dataset.action;
+
+      if (action === 'open-maps') {
+        openInNativeMaps();
+        return;
+      }
+
+      if (action === 'full-map') {
+        document.body.classList.toggle('full-map');
+        if (map) setTimeout(() => map.invalidateSize(), 150);
+        return;
+      }
     });
   }
 
@@ -574,6 +592,9 @@ async function init() {
   // --------------------------
   // First render
   // --------------------------
+
+  // Start on list view, and keep Reset hidden until Treasure page
+  if (resetBtn) resetBtn.style.display = 'none';
   setupMap();
   renderList();
   panToSelected();
