@@ -39,14 +39,7 @@
     "lng": 151.22808678594717,
     "stamp": "assets/scroll.png"
   },
-  {
-    "id": "nielsen-park",
-    "name": "Nielsen Park – Shark Beach, Vaucluse",
-    "suburb": "Nielsen Park",
-    "lat": -33.850562,
-    "lng": 151.267464,
-    "stamp": "assets/spyglass.png"
-  },
+
   {
     "id": "watsons-bay",
     "name": "Watsons Bay Baths, Watsons Bay",
@@ -54,13 +47,5 @@
     "lat": -33.845036171452385,
     "lng": 151.2814804824114,
     "stamp": "assets/pouch.png"
-  },
-  {
-    "id": "parsley-bay",
-    "name": "Parsley Bay Swimming Enclosure, Vaucluse",
-    "suburb": "Parsley Bay",
-    "lat": -33.851478445440314,
-    "lng": 151.2775158904059,
-    "stamp": "assets/chest.png"
   }
 ]
