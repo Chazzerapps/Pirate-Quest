@@ -56,13 +56,15 @@
     <section id="listView" class="view active">
       <div class="map-wrap card main-layout">
         <div id="poolList" class="pool-header"></div>
-      <div class="nav-middle">
-       <button id="openNativeMap" class="map-small">Open in Maps</button>
-       <button id="mapToggle" class="map-small">Full Map</button>
-      </div>
-        <div class="nav-bar">
+<div class="nav-bar">
           <button id="btnDown" class="nav-big" aria-label="Previous pool">Prev</button>
-<button id="btnUp" class="nav-big" aria-label="Next pool">Next</button>
+
+          <div class="nav-middle">
+            <button class="map-small" type="button" data-action="open-maps">Open in Maps</button>
+            <button class="map-small" type="button" data-action="full-map">Full Map</button>
+          </div>
+
+          <button id="btnUp" class="nav-big" aria-label="Next pool">Next</button>
         </div>
 
         <div id="map" class="pool-map"></div>
