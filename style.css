@@ -612,8 +612,11 @@ body.full-map #map{ height:100% !important; }
 .overview-subtext{
   margin:2px 0 0;
   font-size:13px;
-  color:#6c7486;
+  color: #3E5F8A; /* friendly ocean blue */
+  font-weight: 600;
 }
+
+
 
 #overviewMap{
   width:100%;
