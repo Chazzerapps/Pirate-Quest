@@ -145,8 +145,11 @@ header.glass{
 .brand .dot{
   width:14px; height:14px;
   border-radius:50%;
-  background:linear-gradient(135deg,var(--gold),var(--gold-mid));
-  box-shadow:0 0 0 3px rgba(207,176,110,.25);
+
+   background: linear-gradient(135deg, #FFD56A, #E6B84F);
+  box-shadow: 0 0 0 4px rgba(255, 213, 106, 0.35);
+}
+
 }
 .brand h1{
   margin:0;
