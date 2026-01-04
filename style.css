@@ -34,12 +34,23 @@
   --page-bg:#F6F3EC;
 }
 
+/* iOS/Safari: prevent text autoscaling from inflating headings */
+html{
+  -webkit-text-size-adjust:100%;
+}
+
 html,body{
   height:100%;
   margin:0;
   font-family:'Nunito',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   color:var(--ink);
   background:var(--page-bg);
+}
+
+/* Normalize headings so user-agent styles don’t blow up sizes */
+h1{
+  font-size:1em;
+  font-weight:inherit;
 }
 
 /* ==========================================================================
@@ -145,12 +156,12 @@ header.glass{
 .brand .dot{
   width:14px; height:14px;
   border-radius:50%;
-
-   background: linear-gradient(135deg, #FFD56A, #E6B84F);
+  background: linear-gradient(135deg, #FFD56A, #E6B84F);
   box-shadow: 0 0 0 4px rgba(255, 213, 106, 0.35);
 }
 
-}
+/* NOTE: removed stray extra '}' that was here previously */
+
 .brand h1{
   margin:0;
   font-size:15px;
@@ -253,7 +264,6 @@ main{ padding:12px 10px 20px; }
   font-size:12px;
 }
 
-
 /* Pool header mini actions (Open in Maps / Full Map) */
 .pool-left{
   display:flex;
@@ -272,7 +282,6 @@ main{ padding:12px 10px 20px; }
   font-size: 0.75rem;
   border-radius: 10px;
 }
-
 
 .coords{
   font-size:12px;
@@ -615,8 +624,6 @@ body.full-map #map{ height:100% !important; }
   color: #3E5F8A; /* friendly ocean blue */
   font-weight: 600;
 }
-
-
 
 #overviewMap{
   width:100%;
