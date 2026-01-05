@@ -847,3 +847,35 @@ body.kids.splash-body{
   filter:drop-shadow(0 3px 4px rgba(0,0,0,0.35));
 }
 .leaflet-marker-icon.raymond-visited{ transform:scale(1.05); }
+/* ==========================================================================
+   PASSPORT STAMP POSITION TWEAK (iPhone-friendly)
+   ========================================================================== */
+
+/* Tighten vertical padding inside the passport card */
+.passport{
+  padding-top:12px;     /* was 16px */
+  padding-bottom:12px;  /* was 14px */
+}
+
+/* Pull the stamp upward */
+.passport .stamp{
+  margin-top:4px;   /* was 10px */
+  margin-bottom:2px; /* was 6px */
+}
+
+/* Slightly reduce title spacing above stamp */
+.passport .title{
+  margin-bottom:2px;
+}
+
+/* Mobile-specific fine tuning */
+@media (max-width:700px){
+  .passport{
+    min-height:auto; /* prevent forced vertical stretch */
+  }
+
+  .passport .stamp img{
+    width:min(260px, 74vw); /* a touch smaller so it always fits */
+  }
+}
+
