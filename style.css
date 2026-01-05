@@ -34,6 +34,20 @@
   --page-bg:#F6F3EC;
 }
 
+
+/* iOS/Safari: prevent text autoscaling from inflating headings/buttons */
+html{
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Normalize headings so browser defaults don't inflate sizes */
+h1{
+  font-size: 1em;
+  font-weight: inherit;
+  margin: 0;
+}
+
 html,body{
   height:100%;
   margin:0;
@@ -150,10 +164,10 @@ header.glass{
   box-shadow: 0 0 0 4px rgba(255, 213, 106, 0.35);
 }
 
-}
+
 .brand h1{
   margin:0;
-  font-size:20px;
+  font-size: clamp(15px, 4.2vw, 18px);
   letter-spacing:.04em;
 }
 
@@ -557,24 +571,6 @@ body.full-map #map{ height:100% !important; }
     height:100% !important;
     min-height:300px !important;
   }
-}
-/* === Fix oversized text on Passport / Treasure page (iOS Safari) === */
-
-/* Main location title */
-.passport .title{
-  font-size:14px;        /* was 16px */
-  line-height:1.25;
-}
-
-/* Sub-location / subtitle */
-.passport .subtitle{
-  font-size:12px;
-  line-height:1.2;
-}
-
-/* Extra safety: prevent Safari from autoscaling inside passport */
-.passport{
-  -webkit-text-size-adjust:100%;
 }
 
 /* ==========================================================================
