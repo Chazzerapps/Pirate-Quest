@@ -558,6 +558,24 @@ body.full-map #map{ height:100% !important; }
     min-height:300px !important;
   }
 }
+/* === Fix oversized text on Passport / Treasure page (iOS Safari) === */
+
+/* Main location title */
+.passport .title{
+  font-size:14px;        /* was 16px */
+  line-height:1.25;
+}
+
+/* Sub-location / subtitle */
+.passport .subtitle{
+  font-size:12px;
+  line-height:1.2;
+}
+
+/* Extra safety: prevent Safari from autoscaling inside passport */
+.passport{
+  -webkit-text-size-adjust:100%;
+}
 
 /* ==========================================================================
    BIG ARROWS (if used)
