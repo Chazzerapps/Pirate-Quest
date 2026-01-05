@@ -34,23 +34,12 @@
   --page-bg:#F6F3EC;
 }
 
-/* iOS/Safari: prevent text autoscaling from inflating headings */
-html{
-  -webkit-text-size-adjust:100%;
-}
-
 html,body{
   height:100%;
   margin:0;
   font-family:'Nunito',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   color:var(--ink);
   background:var(--page-bg);
-}
-
-/* Normalize headings so user-agent styles don’t blow up sizes */
-h1{
-  font-size:1em;
-  font-weight:inherit;
 }
 
 /* ==========================================================================
@@ -156,15 +145,15 @@ header.glass{
 .brand .dot{
   width:14px; height:14px;
   border-radius:50%;
-  background: linear-gradient(135deg, #FFD56A, #E6B84F);
+
+   background: linear-gradient(135deg, #FFD56A, #E6B84F);
   box-shadow: 0 0 0 4px rgba(255, 213, 106, 0.35);
 }
 
-/* NOTE: removed stray extra '}' that was here previously */
-
+}
 .brand h1{
   margin:0;
-  font-size:15px;
+  font-size:20px;
   letter-spacing:.04em;
 }
 
@@ -261,8 +250,9 @@ main{ padding:12px 10px 20px; }
 
 .pool-name{
   font-weight:700;
-  font-size:12px;
+  font-size:16px;
 }
+
 
 /* Pool header mini actions (Open in Maps / Full Map) */
 .pool-left{
@@ -282,6 +272,7 @@ main{ padding:12px 10px 20px; }
   font-size: 0.75rem;
   border-radius: 10px;
 }
+
 
 .coords{
   font-size:12px;
@@ -360,7 +351,7 @@ body.full-map #map{ height:100% !important; }
 
 .subtitle{
   margin:10px 2px 6px;
-  font-size:14px;
+  font-size:16px;
   font-weight:800;
 }
 
@@ -422,19 +413,31 @@ body.full-map #map{ height:100% !important; }
 .passport .hint{ font-size:12px; color:#6c7486; }
 
 .passport .stamp{
+  width:100%;
   margin:10px 0 6px;
+  padding:12px;
+  box-sizing:border-box;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  position:relative;
+
+  /* Neat “frame” so the treasure/stamp stays inside the card */
+  border-radius:14px;
+  border:1px solid rgba(15,32,60,.12);
+  background:linear-gradient(180deg, rgba(245,242,234,.85), rgba(255,255,255,.95));
 }
 
-/* BIG stamp */
+/* BIG stamp (kept inside the frame) */
 .passport .stamp img{
-  width:min(280px, 78vw);
+  max-width:100%;
+  max-height:52vh;
+  width:auto;
   height:auto;
   display:block;
+  object-fit:contain;
 }
+
 
 .passport .stamp.pop{ animation:pop .35s ease; }
 @keyframes pop{
@@ -530,7 +533,8 @@ body.full-map #map{ height:100% !important; }
   }
 
   /* Keep stamp big, but a touch smaller on very small screens */
-  .passport .stamp img{ width:min(260px, 82vw); }
+  .passport .stamp{ padding:10px; }
+  .passport .stamp img{ max-height:48vh; }
 }
 
 /* iPhone Safari map height fix */
@@ -613,7 +617,7 @@ body.full-map #map{ height:100% !important; }
 
 .overview-text h2{
   margin:0;
-  font-size:14px;
+  font-size:18px;
   letter-spacing:.06em;
   text-transform:uppercase;
 }
@@ -624,6 +628,8 @@ body.full-map #map{ height:100% !important; }
   color: #3E5F8A; /* friendly ocean blue */
   font-weight: 600;
 }
+
+
 
 #overviewMap{
   width:100%;
@@ -847,35 +853,3 @@ body.kids.splash-body{
   filter:drop-shadow(0 3px 4px rgba(0,0,0,0.35));
 }
 .leaflet-marker-icon.raymond-visited{ transform:scale(1.05); }
-/* ==========================================================================
-   PASSPORT STAMP POSITION TWEAK (iPhone-friendly)
-   ========================================================================== */
-
-/* Tighten vertical padding inside the passport card */
-.passport{
-  padding-top:12px;     /* was 16px */
-  padding-bottom:12px;  /* was 14px */
-}
-
-/* Pull the stamp upward */
-.passport .stamp{
-  margin-top:4px;   /* was 10px */
-  margin-bottom:2px; /* was 6px */
-}
-
-/* Slightly reduce title spacing above stamp */
-.passport .title{
-  margin-bottom:2px;
-}
-
-/* Mobile-specific fine tuning */
-@media (max-width:700px){
-  .passport{
-    min-height:auto; /* prevent forced vertical stretch */
-  }
-
-  .passport .stamp img{
-    width:min(260px, 74vw); /* a touch smaller so it always fits */
-  }
-}
-
